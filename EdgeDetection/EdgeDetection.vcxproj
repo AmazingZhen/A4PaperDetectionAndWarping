@@ -84,6 +84,7 @@
     <ClInclude Include="CImg.h" />
     <ClInclude Include="draw2d.h" />
     <ClInclude Include="Hough.h" />
+    <ClInclude Include="Segmentation.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Gaussian.h" />
@@ -93,6 +94,7 @@
     <ClCompile Include="draw2d.cpp" />
     <ClCompile Include="Gaussian.cpp" />
     <ClCompile Include="Hough.cpp" />
+    <ClCompile Include="Segmentation.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

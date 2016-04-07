@@ -45,6 +45,9 @@
     <ClInclude Include="Gaussian.h">
       <Filter>头文件\base</Filter>
     </ClInclude>
+    <ClInclude Include="Segmentation.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -64,6 +67,9 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Segmentation.cpp">
+      <Filter>源文件\base</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

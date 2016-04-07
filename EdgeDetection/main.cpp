@@ -6,6 +6,7 @@
 #include "Canny.h"
 #include "draw2d.h"
 #include "Hough.h"
+#include "Segmentation.h"
 #include <cmath>
 #include <iostream>
 #include <sstream>
@@ -43,9 +44,9 @@ int main(int argc, char* argv[])
 		string s2(".jpg");
 
 		CImg<float> image((s1 + getString(i) + s2).c_str());
-		CImg<float> gray = getGray(image);
+		CImg<float> gray = getGaussianBlur(getGray(image));
 
-		CImg<unsigned char> final_res = cannyEdgeDection(gray);
+		CImg<unsigned char> final_res = getEdgeBySegmentation(gray);
 
 		// CImg<unsigned char> edge = cannyEdgeDection(gray);
 		//cout << "edge" << endl;
