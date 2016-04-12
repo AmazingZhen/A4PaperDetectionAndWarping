@@ -7,6 +7,7 @@
 #include "draw2d.h"
 #include "Hough.h"
 #include "Segmentation.h"
+#include "PaperDetection.h"
 #include <cmath>
 #include <iostream>
 #include <sstream>
@@ -39,33 +40,23 @@ CImg<T> getGray(const CImg<T>& src_img) {
 
 int main(int argc, char* argv[])
 {
-	for (int i = 1; i < 6; i++) {
-		string s1("img/");
+	int t;
+
+	for (int i = 1; i < 17; i++) {
+		string s1("dataset/");
 		string s2(".jpg");
 
 		CImg<float> image((s1 + getString(i) + s2).c_str());
 		CImg<float> gray = getGaussianBlur(getGray(image));
 
-		CImg<unsigned char> final_res = getEdgeBySegmentation(gray);
+		CImg<float> res = warp(image, gray);
+		string t1("res/final_");
+		string t2(".jpg");
+		res.save((t1 + getString(i) + t2).c_str());
 
-		// CImg<unsigned char> edge = cannyEdgeDection(gray);
-		//cout << "edge" << endl;
-
-		//string k1("res/canny_");
-		//string k2(".jpg");
-
-		//edge.save((k1 + getString(i) + k2).c_str());
-
-		fineLineFromHough(image, final_res, 4);
-		image.display();
-		//string t1("res4/final_");
-		//string t2(".jpg");
-		//image.save((t1 + getString(i) + t2).c_str());
-
-		//cout << i << endl;
+		cout << i << endl;
 	}
 
-	int t;
 	cin >> t;
 
 	return 0;

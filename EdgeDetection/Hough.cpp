@@ -60,7 +60,7 @@ bool equal(const vector<HoughPoint>& old_center, const vector<HoughPoint>& new_c
 	return true;
 }
 
-CImg<int> getHoughSpace(const CImg<unsigned char>& edge) {
+CImg<int> getHoughSpaceFromEdge(const CImg<unsigned char>& edge) {
 	int dst_height = ceil(sqrt(edge.width() * edge.width() + edge.height() * edge.height()));
 	CImg<int> res(360, dst_height, 1, 1, 0);
 
@@ -309,22 +309,7 @@ bool validCenter(const vector<HoughPoint>& center_points, const HoughPoint& new_
 //	return center_points;
 //}
 
-bool containCurPoint(const vector<HoughPoint>& center_points, const HoughPoint& new_center_point) {
-	if (center_points.size() == 0)
-		return false;
-
-	for (int i = 0; i < center_points.size(); i++) {
-		if (houghPointDistance(center_points[i], new_center_point) < 100) {
-			return true;
-		}
-	}
-
-	return false;
-}
-
-vector<HoughPoint> getHoughPara(const CImg<int>& houghSpace, int num) {
-	srand(time(0));
-
+vector<HoughPoint> getHoughParaFromHoughSpace(const CImg<int>& houghSpace) {
 	int src_width = houghSpace.width();
 	int src_height = houghSpace.height();
 
@@ -355,78 +340,10 @@ vector<HoughPoint> getHoughPara(const CImg<int>& houghSpace, int num) {
 	}
 
 	sort(non_zero_points.begin(), non_zero_points.end());
-	for (int i = 0; i < non_zero_points.size(); i++) {
-		cout << non_zero_points[i].theta << "," << non_zero_points[i].p << "," << non_zero_points[i].vote << endl;
-	}
-
-	// Initialize center points.
-
-	int count = 0;
-	vector<HoughPoint> center_points(num);
-	for (int i = 0; i < non_zero_points.size(); i++) {
-		if (!containCurPoint(center_points, non_zero_points[i])) {
-			center_points[count] = non_zero_points[i];
-			count++;
-
-			if (count == 4) {
-				for (int i = 0; i < center_points.size(); i++) {
-					cout << center_points[i].theta << "," << center_points[i].p << "," << center_points[i].vote << endl;
-				}
-
-				return center_points;
-			}
-		}
-	}
-
-	for (int i = 0; i < center_points.size(); i++) {
-		cout << center_points[i].theta << "," << center_points[i].p << "," << center_points[i].vote << endl;
-	}
-
-	return center_points;
+	
+	return non_zero_points;
 }
 
-
-void drawLineAndCornerFromHoughPara(CImg<float>& image, const vector<HoughPoint>& hough_para) {
-	initSinAndCosValue();
-
-	int src_width = image.width();
-	int src_height = image.height();
-
-	for (int i = 0; i < src_width; i++) {
-		for (int j = 0; j < src_height; j++) {
-			int x = i;
-			int y = src_height - 1 - j;
-
-			int count = 0;
-			for (int k = 0; k < hough_para.size(); k++) {
-				int cur_theta = (hough_para[k]).theta;
-				int cur_p = (hough_para[k]).p;
-
-				float res = x * cos_val[cur_theta] + y * sin_val[cur_theta];
-
-				if (abs(res - cur_p) < 3) {
-					image(i, j, 0) = 0;
-					image(i, j, 1) = 255;
-					image(i, j, 2) = 0;
-
-					count++;
-				}
-			}
-
-			if (count > 1) {
-				image(i, j, 0) = 255;
-				image(i, j, 1) = 0;
-				image(i, j, 2) = 0;
-
-
-			}
-		}
-	}
-}
-
-void fineLineFromHough(CImg<float>& src_img, CImg<unsigned char>& edge, int line_num) {
-	CImg<float> hough_space = getHoughSpace(edge);
-	vector<HoughPoint> hough_para = getHoughPara(hough_space, line_num);
-
-	drawLineAndCornerFromHoughPara(src_img, hough_para);
+vector<HoughPoint> getHoughParamFromEdge(const CImg<unsigned char>& edge) {
+	return getHoughParaFromHoughSpace(getHoughSpaceFromEdge(edge));
 }

@@ -72,13 +72,10 @@ void drawHoughCurve(CImg<T>& image, int x, int y) {
 	}
 }
 
-CImg<int> getHoughSpace(const CImg<unsigned char>& edge);
+float houghPointDistance(const HoughPoint& a, const HoughPoint& b);
+CImg<int> getHoughSpaceFromEdge(const CImg<unsigned char>& edge);
+vector<HoughPoint> getHoughParaFromHoughSpace(const CImg<int>& houghSpace);
 
-vector<HoughPoint> getHoughPara(const CImg<int>& houghSpace, int num);
-
-void drawLineAndCornerFromHoughPara(CImg<float>& image, const vector<HoughPoint>& hough_para);
-
-void fineLineFromHough(CImg<float>& src_img, CImg<unsigned char>& edge, int line_num);
-
+vector<HoughPoint> getHoughParamFromEdge(const CImg<unsigned char>& edge);
 
 #endif
