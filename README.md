@@ -5,12 +5,12 @@ Based on [CImg Library](http://cimg.eu/).
 ## Input
 - A picture in which A4 paper is as main part and has some degree of geometrical distortion.
 - All input images are in the folder "dataset".
-- [sample input](https://github.com/AmazingZhen/A4PaperDetectionAndWarping/blob/master/EdgeDetection/dataset/13.jpg?raw=true)
+- ![sample input](https://github.com/AmazingZhen/A4PaperDetectionAndWarping/blob/master/EdgeDetection/dataset/13.jpg?raw=true)
 
 ## Output
 - A standard 1190 * 1684 image, containing all contents on the A4 paper.
 - All output images are in the folder "res".
-- [sample result](https://github.com/AmazingZhen/A4PaperDetectionAndWarping/blob/master/EdgeDetection/res/final_13.jpg?raw=true)
+- ![sample result](https://github.com/AmazingZhen/A4PaperDetectionAndWarping/blob/master/EdgeDetection/res/final_13.jpg?raw=true)
 
 ## Algorithmic process
 - Edge extraction 
