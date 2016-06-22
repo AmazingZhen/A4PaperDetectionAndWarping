@@ -2,6 +2,9 @@
 A solution for detecting A4 paper by canny, segmentation and hough transform and then warping it.
 Based on [CImg Library](http://cimg.eu/).
 
+## Development Environment
+Win 8 64bits, VS 2013.
+
 ## Input
 - A picture in which A4 paper is as main part and has some degree of geometrical distortion.
 - All input images are in the folder "dataset".
